@@ -1,0 +1,14 @@
+sudo apt install openssh-server openssh-client
+
+nano /etc/ssh/sshd_config
+ descomente a porta 22
+
+ssh usuario@ip
+
+sudo /etc/init.d/ssh restart
+
+copiar arquivo
+ scp arquivo ip:CaminhoOndeQuerCopiarOArquivo
+
+copiar diretorio
+ scp -r arquivo ip:CaminhoOndeQuerCopiarOArquivo

@@ -1,0 +1,47 @@
+sudo apt install apache2
+
+sudo systemctl status apache2
+
+sudo mkdir -p /var/www/example.com/html
+
+sudo chown -R $USER:$USER /var/www/example.com/html
+
+sudo chmod -R 755 /var/www/example.com
+
+geany /var/www/example.com/html/index.html
+ <html>
+    <head>
+        <title>Welcome to Example.com!</title>
+    </head>
+    <body>
+        <h1>Success!  The example.com server block is working!</h1>
+    </body>
+ </html>
+
+sudo geany /etc/apache2/sites-available/example.com.conf
+ <VirtualHost *:80>
+    ServerAdmin admin@example.com
+    ServerName example.com
+    ServerAlias www.example.com
+    DocumentRoot /var/www/example.com/html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+ </VirtualHost>
+
+sudo a2ensite example.com.conf
+
+sudo a2dissite 000-default.conf
+
+sudo apache2ctl configtest
+
+sudo systemctl restart apache2
+
+
+
+
+
+
+
+
+
+
