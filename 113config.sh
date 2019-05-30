@@ -161,7 +161,7 @@ Novo(){
 	cp /etc/bind/db.local /etc/bind/db.local_old
 	cp /etc/bind/db.127 /etc/bind/db.127_old
 
-	#Adaptado a rede 113.167.9 do Lab de Redes
+	#Adaptado a rede ipv4 113.167.9 e ipv6 cafe:: do Lab de Redes
 	echo    "zone \"ubuntu.local\" {
 	type master;
 	file \"/etc/bind/db.local\";
@@ -172,38 +172,39 @@ Novo(){
 	file \"/etc/bind/db.127\";
 	};
 
+	
 	zone \"0.0.0.0.0.0.0.0.e.f.a.c.ip6.arpa\" {
 	type master;
 	file \"/etc/bind/db.127\";
 	};" > /etc/bind/named.conf.local
 
-echo -e "\n;\n; BIND data file for local loopback interface\n;\n\$TTL    604800\n@	IN	SOA	$hostname.ubuntu.local. root.$hostname.ubuntu.local. (\n			      2		; Serial\n			 604800		; Refresh\n			  86400		; Retry\n			2419200		; Expire\n			 604800 )	; Negative Cache TTL\n;" > /etc/bind/db.local
+	echo -e "\n;\n; BIND data file for local loopback interface\n;\n\$TTL    604800\n@	IN	SOA	$hostname.ubuntu.local. root.$hostname.ubuntu.local. (\n			      2		; Serial\n			 604800		; Refresh\n			  86400		; Retry\n			2419200		; Expire\n			 604800 )	; Negative Cache TTL\n;" > /etc/bind/db.local
 
-echo -e "\n;\n; BIND data file for local loopback interface\n;\n\$TTL   604800\n@	IN	SOA	$hostname.ubuntu.local. root.$hostname.ubuntu.local. (\n			      2		; Serial\n			 604800		; Refresh\n			  86400		; Retry\n			2419200		; Expire\n			 604800 )	; Negative Cache TTL\n;" > /etc/bind/db.127
+	echo -e "\n;\n; BIND data file for local loopback interface\n;\n\$TTL   604800\n@	IN	SOA	$hostname.ubuntu.local. root.$hostname.ubuntu.local. (\n			      2		; Serial\n			 604800		; Refresh\n			  86400		; Retry\n			2419200		; Expire\n			 604800 )	; Negative Cache TTL\n;" > /etc/bind/db.127
 
-echo -e "\nubuntu.local.	IN	NS	$hostname.ubuntu.local.\nubuntu.local.	IN	A	$_ip4\nubuntu.local.	IN	AAAA	$_ip6\n" >>  /etc/bind/db.local
-echo -e "\n$hostname	IN	A	$_ip4\n$hostname	IN	AAAA	$_ip6\nservidor	IN	CNAME	$hostname" >> /etc/bind/db.local
+	echo -e "\nubuntu.local.	IN	NS	$hostname.ubuntu.local.\nubuntu.local.	IN	A	$_ip4\nubuntu.local.	IN	AAAA	$_ip6\n" >>  /etc/bind/db.local
+	echo -e "\n$hostname	IN	A	$_ip4\n$hostname	IN	AAAA	$_ip6\nservidor	IN	CNAME	$hostname" >> /etc/bind/db.local
 
-echo -e '\033[07;31mADICIONANDO  NOVAS MAQUINAS AO DNS\033[00;37m'   
-echo "Diga o NOME da maquina: "
-read nome
-echo "Diga o IPv4 da maquina: "
-read ip4
-echo "Diga o IPv6 da maquina: "
-read ip6
-echo "Diga um apelido: "
-read apelido
+	echo -e '\033[07;31mADICIONANDO  NOVAS MAQUINAS AO DNS\033[00;37m'   
+	echo "Diga o NOME da maquina: "
+	read nome
+	echo "Diga o IPv4 da maquina: "
+	read ip4
+	echo "Diga o IPv6 da maquina: "
+	read ip6
+	echo "Diga um apelido: "
+	read apelido
 
-endip4=$(echo $ip4 |sed 's/113.167.9.//g')
-endip6=$(echo $ip6 |sed 's/.*:://g')
+	endip4=$(echo $ip4 |sed 's/113.167.9.//g')
+	endip6=$(echo $ip6 |sed 's/.*:://g')
 
-echo -e "\n	IN	NS	$hostname.\n$auxip4	IN	PTR	$hostname.ubuntu.local.\n$auxip6.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR	$hostname.ubuntu.local.\n\n$endip4	IN	PTR	$nome.ubuntu.local.\n$endip6.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR	$nome.ubuntu.local." >>  /etc/bind/db.127
+	echo -e "\n	IN	NS	$hostname.\n$auxip4	IN	PTR	$hostname.ubuntu.local.\n$auxip6.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR	$hostname.ubuntu.local.\n\n$endip4	IN	PTR	$nome.ubuntu.local.\n$endip6.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0	IN	PTR	$nome.ubuntu.local." >>  /etc/bind/db.127
 
-echo -e "\n$nome	IN	A	$ip4\n$nome	IN	AAAA	$ip6\n$apelido	IN	CNAME	$nome" >> /etc/bind/db.local
-/etc/init.d/bind9 restart
-clear
-/etc/init.d/bind9 status
-Menu
+	echo -e "\n$nome	IN	A	$ip4\n$nome	IN	AAAA	$ip6\n$apelido	IN	CNAME	$nome" >> /etc/bind/db.local
+	/etc/init.d/bind9 restart
+	clear
+	/etc/init.d/bind9 status
+	Menu
 }
 
 Adicionar(){	
