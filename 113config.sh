@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-#####	NAME:				113config.sh
-#####	VERSION:			0.1
+#####	NAME:					113config.sh
+#####	VERSION:				0.1
 #####	DESCRIPTION:			ALGORITMO DE CONFIGURACAO SERVIDORES DHCP E DNS
-#####	DATE OF CREATION:		26/04/2019
-#####	WRITTEN BY:			KARAN LUCIANO SILVA
-#####	E-MAIL:				karanluciano1@gmail.com			
-#####	DISTRO:				ARCH LINUX
-#####	LICENSE:			GPLv3 			
-#####	PROJECT:			https://github.com/lkaranl/lab-redes
+#####	DATE OF CREATION:		25/05/2019
+#####	WRITTEN BY:				KARAN LUCIANO SILVA
+#####	E-MAIL:					karanluciano1@gmail.com			
+#####	DISTRO:					ARCH LINUX
+#####	LICENSE:				GPLv3 			
+#####	PROJECT:				https://github.com/lkaranl/lab-redes
 
 clear
 _ip4=$(ip a |grep "inet "|awk '{print $2}'|tail -n 1|sed 's/\/.*//g')
