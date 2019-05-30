@@ -39,7 +39,6 @@ endip6=$(echo $ip6 |sed 's/.*:://g')
 echo -e '\033[07;32mEXECUTE COM PERMISSAO ROOT\033[00;37m \033[07;31m<<Karan Luciano>>\033[00;37m ' 
 
 Menu(){
-
 	echo -e 'CONFIGURACOES##########' 
 	echo "[ 1 ] INSTALAR/REINSTALAR ISC-DHCP-SERVER"
 	echo "[ 2 ] INSTALAR/REINSTALAR BIND9"
