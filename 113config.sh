@@ -161,7 +161,7 @@ Novo(){
 	cp /etc/bind/db.local /etc/bind/db.local_old
 	cp /etc/bind/db.127 /etc/bind/db.127_old
 
-	#Adptado a rede 113.167.9 do Lab de Redes
+	#Adaptado a rede 113.167.9 do Lab de Redes
 	echo    "zone \"ubuntu.local\" {
 	type master;
 	file \"/etc/bind/db.local\";
