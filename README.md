@@ -1,5 +1,5 @@
 # lab-redes
-Aulas de Laboratório de Redes UNEMAT BBG
+Aulas de Laboratório de Redes UNEMAT-BBG
 
 NÃO ESQUEÇAM DE DAR PERMISSÃO DE EXECUÇÃO AOS ARQUIVOS .SH</br>
 `$sudo chmod +x *.sh`</br>
