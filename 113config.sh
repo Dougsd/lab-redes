@@ -12,7 +12,7 @@ auxip4=$(ip a |grep "inet "|awk '{print $2}'|tail -n 1|sed 's/\/.*//g'|sed 's/11
 auxip6=$(ip a |grep "inet6 "|awk '{print $2}'|tail -n 2|head -n 1|sed 's/\/.*//g'|sed 's/.*:://g')
 endip4=$(echo $ip4 |sed 's/113.167.9.//g')
 endip6=$(echo $ip6 |sed 's/.*:://g')
-echo -e '\033[07;32mEXECUTE COM PERMISSAO ROOT\033[00;37m' 
+echo -e '\033[07;32mEXECUTE COM PERMISSAO ROOT\033[00;37m \033[07;31m<<Karan Luciano>>\033[00;37m ' 
 
 Menu(){
 	 
@@ -22,11 +22,11 @@ Menu(){
 	echo "[ 3 ] CONFIGURAR A REDE"
 	echo "[ 4 ] COLOCAR HOSTNAME NO /ETC/HOSTS"
 	echo -e 'DHCP##########' 
-	echo "[ 5 ] LIMPA SCOPO/RESERVAS E COMECAR UM NOVO"
-	echo "[ 6 ] ADCIONAR RESERVA"
+	echo "[ 5 ] CRIA NOVO SCOPO E RESERVA (APAGA O SCOPO EXISTENTE CASO HAJA)"
+	echo "[ 6 ] ADICIONAR RESERVA A SCOPO JA EXISTENTE"
 	echo -e 'DNS##########' 
-	echo "[ 7 ] LIMPAR TODAS AS ZONAS E COMECAR UMA NOVA"
-	echo "[ 8 ] ADICIONAR A UM ZONA JA EXISTENTE"
+	echo "[ 7 ] CRIA NOVA ZONA(APAGA AS ZONAS EXISTENTES CASO HAJA)"
+	echo "[ 8 ] ADICIONAR HOST A UM ZONA JA EXISTENTE"
 	echo "[ 0 ] SAIR"
 	echo -e '\033[07;31mQUAL A OPCAO DESEJADA?\033[00;37m' 
 	read opcao
@@ -128,6 +128,8 @@ Reserva(){
 	echo -e '\033[07;31mCRIANDO RESERVAS\033[00;37m'   
 	echo "Diga o MAC: "
 	read mac
+	
+	#Validador de MAC by: Diógenes Antônio (https://github.com/dioxfile/Network-Scripts/tree/master/MAC_Validate)
 	if [[ $mac =~ ^[0-9A-Fa-f]{12}$ ]]
 	then
 		echo -e "MAC Valido"
@@ -154,6 +156,7 @@ Novo(){
 	cp /etc/bind/db.local /etc/bind/db.local_old
 	cp /etc/bind/db.127 /etc/bind/db.127_old
 	
+	#Adptado a rede 113.167.9 do Lab de Redes
 	echo    "zone \"ubuntu.local\" {
 	type master;
 	file \"/etc/bind/db.local\";
