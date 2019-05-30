@@ -220,7 +220,7 @@ Hostname(){
 	aux4=$(echo $_ip4    $hostname.ubuntu.local    $hostname)
 	sed -i "1s/^/$aux4\n/" /etc/hosts
 	clear
-	echo -e '\033[07;31mADICIONADO, REINICIE O SEU COMPUTADOR PARA QUE A MUDANCA TENHA EFEITO\033[00;37m' 
+	echo -e '\033[07;31mADICIONADO\033[00;37m' 
 	Menu 
 }
 
